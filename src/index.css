@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* New UI Design Color Palette */
+    --ui-blue: 203 85% 47%;           /* #0E99DE */
+    --ui-green: 154 100% 72%;         /* #76FFAD */
+    --ui-dark: 0 0% 16%;              /* #282828 */
+    --ui-medium-dark: 0 0% 24%;       /* #3E3E3E */
+    --ui-medium-gray: 0 0% 33%;       /* #555555 */
+    --ui-light-gray: 0 0% 92%;        /* #EBEBEB */
+
+    --background: var(--ui-dark);
+    --foreground: var(--ui-light-gray);
+
+    --card: var(--ui-light-gray);
+    --card-foreground: var(--ui-dark);
+
+    --popover: var(--ui-light-gray);
+    --popover-foreground: var(--ui-dark);
+
+    /* Pixel Ed-Tech Brand Colors (keeping for compatibility) */
+    --pixel-orange: 15 100% 60%;
+    --pixel-blue: var(--ui-blue);
+    --pixel-dark: var(--ui-dark);
+    --pixel-light-gray: var(--ui-light-gray);
+    --pixel-mint: 170 60% 85%;
+
+    --primary: var(--ui-blue);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--ui-green);
+    --secondary-foreground: var(--ui-dark);
+
+    --muted: var(--ui-medium-dark);
+    --muted-foreground: var(--ui-medium-gray);
+
+    --accent: var(--ui-green);
+    --accent-foreground: var(--ui-dark);
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: var(--ui-medium-gray);
+    --input: var(--ui-medium-gray);
+    --ring: var(--ui-blue);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --mobile-bottom-nav-height: 112px;
+    --ia-badge-width: 104px;
+    --ia-badge-height: 90px;
+    --bottom-strip-blue-pct: 50%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-montserrat;
+  }
+}
+
+/* Responsive Typography */
+@layer utilities {
+  .text-responsive-xs { @apply text-xs sm:text-sm; }
+  .text-responsive-sm { @apply text-sm sm:text-base; }
+  .text-responsive-base { @apply text-base sm:text-lg; }
+  .text-responsive-lg { @apply text-lg sm:text-xl; }
+  .text-responsive-xl { @apply text-xl sm:text-2xl; }
+  .text-responsive-2xl { @apply text-2xl sm:text-3xl md:text-4xl; }
+  .text-responsive-3xl { @apply text-3xl sm:text-4xl md:text-5xl; }
+  .text-responsive-4xl { @apply text-4xl sm:text-5xl md:text-6xl; }
+  
+  /* Mobile-first spacing */
+  .section-spacing { @apply py-8 sm:py-12 lg:py-16; }
+  .container-padding { @apply px-4 sm:px-6 lg:px-8; }
+  
+  /* Mobile app specific styles */
+  .mobile-safe-area { 
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .mobile-header { 
+    @apply sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b;
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .mobile-bottom-nav {
+    @apply fixed bottom-0 left-0 right-0 z-50;
+    background-color: hsl(var(--ui-medium-dark));
+    min-height: var(--mobile-bottom-nav-height);
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -6px 24px hsl(var(--background)/0.2);
+  }
+  
+  /* Touch-friendly interactive elements */
+  .touch-target { @apply min-h-[44px] min-w-[44px]; }
+  
+  /* Smooth scrolling for mobile */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-main-padding {
+    padding-bottom: calc(var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom));
+  }
+
+  /* IA badge center rectangular styling */
+  .badge-rect {
+    background-color: hsl(var(--ui-dark));
+    border-radius: 0.25rem;
+    box-shadow: 0 10px 24px hsl(var(--ui-dark) / 0.6);
+  }
+
+  /* Mobile nav label typography */
+  .mobile-nav-label {
+    @apply font-black font-montserrat;
+    font-size: 0.625rem; /* 50% smaller */
+    letter-spacing: -0.01em;
+  }
+
+  /* IA badge label */
+  .ia-badge-label {
+    @apply font-black uppercase font-montserrat;
+    font-size: 2rem; /* ~32px */
+    letter-spacing: -0.015em;
+    line-height: 1;
+  }
+}
+:root {
+  /* Tune these to match Figma exactly */
+  --ia-badge-width: 120px;   /* overall width of the tab */
+  --ia-badge-height: 120px;  /* total height incl. semicircle */
+
+  /* Colors (already using HSL tokens elsewhere, keeping it simple here) */
+  --ia-badge-bg: hsl(220 6% 14%);       /* dark charcoal */
+  --ia-badge-fg: hsl(0 0% 100%);        /* white */
+
+  /* Existing bottom strip split (keep yours if already set) */
+  --bottom-strip-blue-pct: 52%;
+}
+
+/* Optional: tighter shadow on small screens */
+@media (max-width: 420px) {
+  :root { --ia-badge-width: 108px; --ia-badge-height: 108px; }
+}
+:root {
+  --ia-badge-width: 90px;            /* overall width */
+  --ia-badge-top: 43px;               /* height of the top rectangle before the curve */
+  --ia-badge-bg: hsl(220 6% 14%);     /* dark charcoal */
+  --ia-badge-fg: hsl(0 0% 100%);      /* white */
+}
+
+/* Tweak for smaller screens if needed */
+@media (max-width: 420px) {
+  :root { --ia-badge-width: 108px; --ia-badge-top: 52px; }
+}
+

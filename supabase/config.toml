@@ -1,0 +1,22 @@
+project_id = "fgzieygxpivjxgdsufso"
+
+[functions.generate-circular-semanal]
+verify_jwt = true
+
+[functions.generate-lesson-plan]
+verify_jwt = true
+
+[functions.create-checkout-session]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.check-subscription]
+verify_jwt = true
+
+[functions.customer-portal]
+verify_jwt = true
+
+[functions.generate-evaluation]
+verify_jwt = true
