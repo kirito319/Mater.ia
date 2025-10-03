@@ -20,6 +20,7 @@ import Education from "./pages/Education";
 import AI from "./pages/AI";
 import Subscription from "./pages/Subscription";
 import NotFound from "./pages/NotFound";
+import RouteChangeLoader from "@/components/RouteChangeLoader";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <RouteChangeLoader />
           <Routes>
             <Route path="/" element={ <Auth />} />
             <Route path="/auth" element={<Auth />} />

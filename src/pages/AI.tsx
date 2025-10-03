@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ChevronDown, FileText, Copy, Download, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ChevronDown, FileText, Copy, Download, RotateCcw, BookOpen, Mail, Presentation, FileCheck, PenTool, CheckSquare, MessageSquare, Edit3, Play, Users, Calendar, ClipboardList } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MobileLayout } from '@/components/MobileLayout';
@@ -2922,6 +2922,95 @@ FORMATO REQUERIDO:
       window.history.replaceState({}, '', '/ai');
     }
   }, [refreshUsage, toast]);
+
+  // Definición de herramientas con iconos y descripciones
+  const aiTools = [
+    {
+      id: 'lesson-plan',
+      title: 'Plan de Lección/Tema',
+      description: 'Crea planes de lección estructurados y detallados para cualquier tema educativo.',
+      icon: BookOpen,
+      color: 'bg-blue-500'
+    },
+    {
+      id: 'newsletter',
+      title: 'Circular a Familias',
+      description: 'Genera comunicaciones profesionales para mantener informadas a las familias.',
+      icon: Mail,
+      color: 'bg-green-500'
+    },
+    {
+      id: 'evaluation',
+      title: 'Examen Opción Múltiple',
+      description: 'Crea evaluaciones con preguntas de opción múltiple personalizadas.',
+      icon: CheckSquare,
+      color: 'bg-purple-500'
+    },
+    {
+      id: 'presentation',
+      title: 'Generador de Presentación',
+      description: 'Diseña presentaciones educativas atractivas y profesionales.',
+      icon: Presentation,
+      color: 'bg-orange-500'
+    },
+    {
+      id: 'academic-content',
+      title: 'Contenido Académico',
+      description: 'Desarrolla contenido educativo adaptado a diferentes niveles y materias.',
+      icon: FileText,
+      color: 'bg-indigo-500'
+    },
+    {
+      id: 'professional-email',
+      title: 'Escritor de Correos',
+      description: 'Reescribe tus ideas en un correo profesional y bien estructurado.',
+      icon: MessageSquare,
+      color: 'bg-pink-500'
+    },
+    {
+      id: 'worksheet',
+      title: 'Generador de Hojas de Trabajo',
+      description: 'Crea hojas de trabajo interactivas y ejercicios personalizados.',
+      icon: ClipboardList,
+      color: 'bg-teal-500'
+    },
+    {
+      id: 'rubric-generator',
+      title: 'Generador de Rúbricas',
+      description: 'Desarrolla rúbricas de evaluación claras y objetivas.',
+      icon: FileCheck,
+      color: 'bg-red-500'
+    },
+    {
+      id: 'writing-feedback',
+      title: 'Retroalimentación de Escritura',
+      description: 'Proporciona retroalimentación constructiva para mejorar la escritura.',
+      icon: PenTool,
+      color: 'bg-yellow-500'
+    },
+    {
+      id: 'informative-texts',
+      title: 'Textos Informativos',
+      description: 'Genera textos informativos claros y educativos sobre cualquier tema.',
+      icon: Edit3,
+      color: 'bg-cyan-500'
+    },
+    {
+      id: 'text-corrector',
+      title: 'Corrector de Textos',
+      description: 'Revisa y corrige textos para mejorar gramática y estilo.',
+      icon: Edit3,
+      color: 'bg-emerald-500'
+    },
+    {
+      id: 'youtube-questions',
+      title: 'Preguntas sobre Video de YouTube',
+      description: 'Genera preguntas educativas basadas en videos de YouTube.',
+      icon: Play,
+      color: 'bg-rose-500'
+    }
+  ];
+
   const handleAIButtonClick = (actionType: 'newsletter' | 'lesson-plan' | 'evaluation' | 'worksheet' | 'presentation' | 'academic-content' | 'professional-email' | 'rubric-generator' | 'writing-feedback' | 'informative-texts' | 'text-corrector' | 'youtube-questions') => {
     if (!canUseAI) {
       setShowUpgradeModal(true);
@@ -2954,27 +3043,27 @@ FORMATO REQUERIDO:
     }
   };
   return <MobileLayout title="Herramientas IA" hideHeader={true}>
-      <div className="container-padding section-spacing min-h-screen bg-[#555555]">
+      <div className="container-padding section-spacing min-h-screen bg-white">
         {/* Back Button */}
         <div className="mb-6">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard')} className="mb-4 -ml-2 text-white hover:bg-[#3e3e3e]">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard')} className="mb-4 -ml-2 text-gray-600 hover:text-black hover:bg-gray-50 transition-colors">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Volver
+            Atrás
           </Button>
           
-          <h1 className="text-responsive-2xl text-white text-center font-bold text-lg">
+          <h1 className="text-responsive-2xl text-black text-center font-bold text-lg">
             Herramientas IA
           </h1>
         </div>
 
         {/* Category Dropdown */}
         <div className="mb-6">
-          <Label className="text-white font-semibold text-sm mb-3 block rounded-none">
+          <Label className="text-black font-semibold text-sm mb-3 block rounded-none">
             Categoría
           </Label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full justify-between bg-[#3e3e3e] border-[#3e3e3e] text-white h-12 text-left hover:bg-[#3e3e3e]/80">
+              <Button variant="outline" className="w-full justify-between bg-gray-100 border-gray-300 text-black h-12 text-left hover:bg-gray-200">
                 <div className="flex items-center gap-2">
                   <FileText className="h-4 w-4" />
                   {selectedCategory}
@@ -2982,10 +3071,10 @@ FORMATO REQUERIDO:
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-full bg-[#3e3e3e] border-[#3e3e3e]">
+            <DropdownMenuContent className="w-full bg-white border-gray-300">
               {categories.map(category => {
               const Icon = category.icon;
-              return <DropdownMenuItem key={category.value} onClick={() => setSelectedCategory(category.label)} className="flex items-center gap-2 cursor-pointer text-white hover:bg-[#555555]">
+              return <DropdownMenuItem key={category.value} onClick={() => setSelectedCategory(category.label)} className="flex items-center gap-2 cursor-pointer text-black hover:bg-gray-100">
                     <Icon className="h-4 w-4" />
                     {category.label}
                   </DropdownMenuItem>;
@@ -2996,157 +3085,70 @@ FORMATO REQUERIDO:
 
         {/* AI Usage Indicator */}
         <div className="mb-6">
-          <AIUsageIndicator usageCount={usageCount} subscriptionStatus={subscriptionStatus} isLoading={isUsageLoading} onUpgradeClick={() => setShowUpgradeModal(true)} />
+          <div className="bg-gray-100 border border-gray-300 rounded-lg p-4">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm font-semibold text-black">
+                Uso Restante: {usageCount}/15
+              </span>
+            </div>
+            
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+              <div 
+                className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-300"
+                style={{ width: `${(usageCount / 15) * 100}%` }}
+              ></div>
+            </div>
+            
+            {/* Upgrade Button */}
+            <Button 
+              onClick={() => setShowUpgradeModal(true)} 
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded-lg transition-colors"
+            >
+              ¡Acceso Ilimitado!
+            </Button>
+          </div>
         </div>
 
         {/* Section Title */}
-        <h2 className="text-white mb-4 text-sm text-center font-light my-[18px]">El futuro de la educación es ahora...</h2>
+        <h2 className="text-black mb-6 text-lg text-center font-bold my-[18px]">El futuro de la educación es ahora...</h2>
 
-        {/* AI Action Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('newsletter')}>
-            <CardContent className="p-6 py-[7px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-0 text-center font-bold">
-                  Circular Semanal
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('lesson-plan')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Plan de Lección
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('evaluation')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Evaluación
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('worksheet')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Generador de Hojas de Trabajo
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('presentation')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Generador de Presentaciones
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('academic-content')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Contenido Académico
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('professional-email')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Correo Profesional
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('rubric-generator')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Generador de Rúbricas
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('writing-feedback')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Retroalimentación de Escritura
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('informative-texts')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Textos Informativos
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('text-corrector')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Corrector de Textos
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className={`bg-[#3e3e3e] border-0 cursor-pointer hover:bg-[#3e3e3e]/80 transition-colors rounded-lg ${!canUseAI ? '' : ''}`} onClick={() => handleAIButtonClick('youtube-questions')}>
-            <CardContent className="p-6 py-[4px]">
-              <div className="text-center">
-                
-                <h3 className="text-lg text-white py-[4px] font-bold">
-                  Preguntas sobre Video de YouTube
-                </h3>
-                {!canUseAI && <p className="text-xs text-white/60 mt-1">Límite alcanzado</p>}
-              </div>
-            </CardContent>
-          </Card>
+        {/* AI Tools Horizontal Scroll */}
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          {aiTools.map((tool) => {
+            const IconComponent = tool.icon;
+            return (
+              <Card 
+                key={tool.id} 
+                className={`bg-white border border-gray-200 cursor-pointer hover:shadow-md hover:border-blue-300 transition-all duration-200 rounded-lg flex-shrink-0 w-72 ${!canUseAI ? 'opacity-50' : ''}`} 
+                onClick={() => handleAIButtonClick(tool.id as any)}
+              >
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    {/* Icon */}
+                    <div className={`${tool.color} p-2 rounded-lg flex-shrink-0`}>
+                      <IconComponent className="h-5 w-5 text-white" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-bold text-black mb-1 leading-tight">
+                        {tool.title}
+                      </h3>
+                      <p className="text-xs text-gray-600 leading-relaxed">
+                        {tool.description}
+                      </p>
+                      {!canUseAI && (
+                        <p className="text-xs text-red-500 mt-1 font-medium">
+                          Límite alcanzado
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
         {/* Form Dialog */}

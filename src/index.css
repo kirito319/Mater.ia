@@ -154,7 +154,7 @@ All colors MUST be HSL.
   
   .mobile-bottom-nav {
     @apply fixed bottom-0 left-0 right-0 z-50;
-    background-color: hsl(var(--ui-medium-dark));
+    background-color: #F5F5F5;
     min-height: var(--mobile-bottom-nav-height);
     padding-bottom: env(safe-area-inset-bottom);
     box-shadow: 0 -6px 24px hsl(var(--background)/0.2);

@@ -90,7 +90,7 @@ export const MobileLayout: React.FC<MobileLayoutProps> = ({
         {children}
       </main>
 
-      <nav className="mobile-bottom-nav" role="navigation" aria-label="Primary">
+      <nav className="mobile-bottom-nav" role="navigation" aria-label="Primary" style={{ backgroundColor: '#F5F5F5' }}>
         <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-center pointer-events-none">
          <div className="translate-y-[-18px]">
           <IABadge
@@ -115,8 +115,8 @@ export const MobileLayout: React.FC<MobileLayoutProps> = ({
                 className={`flex flex-col items-center gap-1 touch-target px-4 py-2 rounded-xl font-montserrat text-foreground hover:bg-transparent ${isActivePath(leftItem.path) ? 'opacity-100' : 'opacity-80'}`}
                 onClick={() => navigate(leftItem.path)}
               >
-                <LeftIcon className="!h-11 !w-11 text-[hsl(var(--primary-foreground))]" />
-               <span className="mobile-nav-label text-base font-bold text-[hsl(var(--primary-foreground))]">
+                <LeftIcon className="!h-11 !w-11 text-black" />
+               <span className="mobile-nav-label text-base font-bold text-black">
                 {leftItem.label}
                </span>
 
@@ -134,8 +134,8 @@ export const MobileLayout: React.FC<MobileLayoutProps> = ({
                 className={`flex flex-col items-center gap-1 touch-target px-4 py-2 rounded-xl font-montserrat text-foreground hover:bg-transparent ${isActivePath(rightItem.path) ? 'opacity-100' : 'opacity-80'}`}
                 onClick={() => navigate(rightItem.path)}
               >
-                <RightIcon className="!h-11 !w-11 text-[hsl(var(--primary-foreground))]" />
-              <span className="mobile-nav-label text-base font-bold text-[hsl(var(--primary-foreground))]">
+                <RightIcon className="!h-11 !w-11 text-black" />
+              <span className="mobile-nav-label text-base font-bold text-black">
                {rightItem.label}
               </span>
                 
@@ -144,12 +144,11 @@ export const MobileLayout: React.FC<MobileLayoutProps> = ({
           </div>
 
           {/* Bottom color strip */}
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3" aria-hidden="true">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2" aria-hidden="true">
             <div
               className="w-full h-full"
               style={{
-                background:
-                  'linear-gradient(to right, hsl(var(--ui-blue)) 0%, hsl(var(--ui-blue)) var(--bottom-strip-blue-pct), hsl(var(--ui-green)) var(--bottom-strip-blue-pct), hsl(var(--ui-green)) 100%)',
+                background: 'linear-gradient(to right, #4A90E2 0%, #4A90E2 65%, #90EE90 65%, #90EE90 100%)',
               }}
             />
           </div>

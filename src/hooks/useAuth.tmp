@@ -9,25 +9,28 @@ export const useAuthHook = () => {
     setLoading(true);
     try {
       const redirectUrl = `${window.location.origin}/`;
-
+      
       const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
           emailRedirectTo: redirectUrl,
-          data: { nombre, apellido }
+          data: {
+            nombre,
+            apellido,
+          }
         }
       });
 
       if (error) {
         if (error.message.includes('User already registered')) {
-          toast({
+          ?TOAST?(
             title: "Error",
-            description: "Ya existe una cuenta con este correo electrA3nico. Por favor, inicia sesiA3n.",
+            description: "Ya existe una cuenta con este correo electrónico. Por favor, inicia sesión.",
             variant: "destructive",
           });
         } else {
-          toast({
+          ?TOAST?(
             title: "Error al registrarse",
             description: error.message,
             variant: "destructive",
@@ -36,17 +39,17 @@ export const useAuthHook = () => {
         return { error };
       }
 
-      toast({
-        title: "A�Registro exitoso!",
-        description: "Revisa tu correo electrA3nico para confirmar tu cuenta.",
+      ?TOAST?(
+        title: "¡Registro exitoso!",
+        description: "Revisa tu correo electrónico para confirmar tu cuenta.",
         variant: "default",
       });
 
       return { error: null };
     } catch (error) {
-      toast({
+      ?TOAST?(
         title: "Error",
-        description: "OcurriA3 un error inesperado. Intenta nuevamente.",
+        description: "Ocurrió un error inesperado. Intenta nuevamente.",
         variant: "destructive",
       });
       return { error };
@@ -58,18 +61,21 @@ export const useAuthHook = () => {
   const signIn = async (email: string, password: string) => {
     setLoading(true);
     try {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
       if (error) {
         if (error.message.includes('Invalid login credentials')) {
-          toast({
-            title: "Error de autenticaciA3n",
-            description: "Correo electrA3nico o contraseA�a incorrectos.",
+          ?TOAST?(
+            title: "Error de autenticación",
+            description: "Correo electrónico o contraseña incorrectos.",
             variant: "destructive",
           });
         } else {
-          toast({
-            title: "Error al iniciar sesiA3n",
+          ?TOAST?(
+            title: "Error al iniciar sesión",
             description: error.message,
             variant: "destructive",
           });
@@ -77,11 +83,17 @@ export const useAuthHook = () => {
         return { error };
       }
 
+      ?TOAST?(
+        title: "¡Bienvenido!",
+        description: "Has iniciado sesión correctamente.",
+        variant: "default",
+      });
+
       return { error: null };
     } catch (error) {
-      toast({
+      ?TOAST?(
         title: "Error",
-        description: "OcurriA3 un error inesperado. Intenta nuevamente.",
+        description: "Ocurrió un error inesperado. Intenta nuevamente.",
         variant: "destructive",
       });
       return { error };
@@ -94,22 +106,27 @@ export const useAuthHook = () => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signOut();
-
+      
       if (error) {
-        toast({
+        ?TOAST?(
           title: "Error",
-          description: "No se pudo cerrar sesiA3n. Intenta nuevamente.",
+          description: "No se pudo cerrar sesión. Intenta nuevamente.",
           variant: "destructive",
         });
         return { error };
       }
 
-      // No mostrar toast al cerrar sesión
+      ?TOAST?(
+        title: "Sesión cerrada",
+        description: "Has cerrado sesión correctamente.",
+        variant: "default",
+      });
+
       return { error: null };
     } catch (error) {
-      toast({
+      ?TOAST?(
         title: "Error",
-        description: "OcurriA3 un error inesperado.",
+        description: "Ocurrió un error inesperado.",
         variant: "destructive",
       });
       return { error };
@@ -118,5 +135,10 @@ export const useAuthHook = () => {
     }
   };
 
-  return { signUp, signIn, signOut, loading };
+  return {
+    signUp,
+    signIn,
+    signOut,
+    loading,
+  };
 };
